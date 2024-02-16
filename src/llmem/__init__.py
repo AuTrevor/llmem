@@ -97,7 +97,7 @@ async def chat(request):
     normalized_messages =  normalize_messages(body['messages'])
     now = time.time()
     age = None
-    if string_age := body.pop('age', None):
+    if string_age := body.pop('age', "8w"):
         age = convert_to_seconds(string_age)
     cursor = await database.execute(QUERY,
                                     {

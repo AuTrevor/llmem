@@ -13,6 +13,8 @@ Why:
 
 It currently only supports the chat completion API. 
 
+There is one additional (optional) field in the request, `age`. You can give it a number + characters like `10w` it will only return from cache if the entry is younger than that (in this case 10 weeks). Acceptable characters are s(econds), m(inute), h(hours), d(ays), w(eeks), y(ears).
+
 ### requests
 
 **NOTE**: These examples run against my public server `llmem.com`. You [might want to run your own server instead](#public-server).
