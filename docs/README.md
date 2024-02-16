@@ -82,7 +82,7 @@ docker run --rm -p 8000:8000  -v ~/.llmem:/workspace ghcr.io/c0g/llmem:latest
 ### python
 
 ```bash
-pip install .
+pip install llmem
 uvicorn llmem:app
 ```
 
