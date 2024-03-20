@@ -4,6 +4,7 @@ from starlette.applications import Starlette
 from starlette.responses import Response, HTMLResponse
 from starlette.routing import Route
 from starlette.config import Config
+import os
 import json
 import aiohttp
 
@@ -35,6 +36,7 @@ html = f"<html><head><title>LLMem</title></head><body>{html}</body></html>"
 
 database = None
 config = Config()
+base_url = os.getenv('OAI_BASE_URL', 'https://api.openai.com/v1/chat/completions')
 
 seconds_per_unit = {"s": 1, "m": 60, "h": 3600, "d": 86400, "w": 604800, "y": 32850000}
 
@@ -84,12 +86,13 @@ def normalize_messages(d):
 
 async def hit_oai(headers, body):
     body.pop('age', None)
+    auth = headers.get('Authorization')
     headers = {
         "Content-Type": "application/json",
-        "Authorization": headers['Authorization']
+        "Authorization": auth if auth else ''
     }
     async with aiohttp.ClientSession() as session:
-        async with session.post('https://api.openai.com/v1/chat/completions', headers=headers, json=body) as response:
+        async with session.post(base_url, headers=headers, json=body) as response:
             return await response.json()
 
 async def chat(request):

@@ -77,6 +77,8 @@ chat_completion = client.chat.completions.create(
 
 Makes it available on port `8000`, and keeps its cache in `~/.llmem`.
 
+Update the Dockerfile environment variable to point to other OAI compliant APIs (ollama, etc)
+
 ```bash
 docker run --rm -p 8000:8000  -v ~/.llmem:/workspace ghcr.io/c0g/llmem:latest
 ```
